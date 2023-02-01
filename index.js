@@ -2,7 +2,7 @@ const { response } = require('express');
 const express = require('express');
 const app = express();
 const { createClient } = require('redis');
-const { checkRedis } = require('./controler/checkRedis');
+const { checkRedis } = require('./controller/checkRedis');
 
 const client = createClient({
   host: '127.0.0.1',

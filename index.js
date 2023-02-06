@@ -3,17 +3,20 @@ const express = require('express');
 const app = express();
 const { createClient } = require('redis');
 const { checkRedis } = require('./controller/checkRedis');
-
+const dotenv = require('dotenv');
+dotenv.config();
 const client = createClient({
   host: '127.0.0.1',
-  port: 6379,
+  port: process.env.CLIENTPORT,
 });
 
 // let sourceURL = 'https://jsonplaceholder.typicode.com/todos';
-app.listen(3000, () => {
-  console.log('created server at 3000 port');
+app.listen(process.env.PORT, () => {
+  console.log('created server at ' + process.env.PORT + ' port');
   client.connect().then(() => {
     console.log('connected to redis');
+  }).catch(err => {
+    console.log("error:", err);
   });
 });
 // app.use(checkRedis);
